@@ -14,12 +14,15 @@ export class AppController {
   ) {}
 
   @Post('order')
-  createorder(@Body() createorder: any) {
-    console.log(createorder);
+  createorder(@Body() body: any) {
+    console.log(body.repository.name);
 
     this.httpService
       .post(
         'https://discord.com/api/webhooks/1124927168984645802/E8ZIt-OL39wSweqjiR2aJKCUNPKoRRXlKwmRw5aI2dFa6lyxQ1SlM8SGiipZSecvWpjd',
+        {
+          notify: body.repository.name,
+        },
       )
       .subscribe({
         complete: () => {
@@ -29,6 +32,6 @@ export class AppController {
           console.log(err);
         },
       });
-    return createorder;
+    return { message: 'ok' };
   }
 }
