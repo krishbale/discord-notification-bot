@@ -1,22 +1,42 @@
-import { Controller, Get, Sse } from '@nestjs/common';
+import { Body, Controller, Get, Post, Sse } from '@nestjs/common';
 import { AppService } from './app.service';
-import { Observable, interval, map } from 'rxjs';
+import { HttpService } from '@nestjs/axios';
 
 interface MessageEvent {
   data: string | object;
 }
 
-@Controller('api')
+@Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly httpService: HttpService,
+  ) {}
 
-  @Sse('event')
-  sendEvent(): Observable<MessageEvent> {
-    return interval(1000).pipe(
-      // map((_) => ({ data: 'test' })),
-      map((num: number) => ({
-        data: 'hello' + num,
-      })),
-    );
+  @Post('order')
+  createorder(@Body() data) {
+    const createorder = this.appService.createOrder(data);
+    //database upload
+    //user saved
+    //database completed
+
+    this.httpService
+      .post(
+        'https://discord.com/api/webhooks/1124927168984645802/E8ZIt-OL39wSweqjiR2aJKCUNPKoRRXlKwmRw5aI2dFa6lyxQ1SlM8SGiipZSecvWpjd',
+        {
+          data: {
+            content: 'New Order Created',
+          },
+        },
+      )
+      .subscribe({
+        complete: () => {
+          console.log('completed');
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    return createorder;
   }
 }

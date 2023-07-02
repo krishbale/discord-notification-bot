@@ -1,11 +1,18 @@
-<script type="text/javascript">
-    const eventSource = new EventSource('/api/event')
 
+<html>
+    <body>
+        <h1>Hello from localhost 3000</h1>
+    </body>
+    <!-- <script type="text/javascript">
+        // const eventSource = new EventSource('/api/event')
+    
+    
+        eventSource.onmessage= ({data}) => {
+            const message = document.createElement('li')
+            message.innerText = data;
+            document.body.appendChild(message)
+    
+        }
+    </script> -->
+</html>
 
-    eventSource.onmessage= ({data}) => {
-        const message = document.createElement('li')
-        message.innerText = data;
-        document.body.appendChild(message)
-
-    }
-</script>
