@@ -1,6 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { HttpService } from '@nestjs/axios';
+import { DISCORD_WEBHOOK_URL } from './constant';
 
 @Controller()
 export class AppController {
@@ -11,6 +12,7 @@ export class AppController {
 
   @Post('order')
   handleconsumemessage(@Body() body: any) {
+    console.log(body);
     const avatarurl = body.sender.avatar_url;
     const content = `Hello sir, there is a new commit on 
    Repository: ${body.repository.name} <hr>
@@ -20,7 +22,9 @@ export class AppController {
      <hr> View commit message: ${body.head_commit.message}`;
     this.httpService
       .post(
-        'https://discord.com/api/webhooks/1124927168984645802/E8ZIt-OL39wSweqjiR2aJKCUNPKoRRXlKwmRw5aI2dFa6lyxQ1SlM8SGiipZSecvWpjd',
+        //azure webhook url if available
+        DISCORD_WEBHOOK_URL,
+
         {
           content: content,
           embeds: [
