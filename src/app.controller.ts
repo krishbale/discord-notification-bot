@@ -14,20 +14,12 @@ export class AppController {
   ) {}
 
   @Post('order')
-  createorder(@Body() data) {
-    const createorder = this.appService.createOrder(data);
-    //database upload
-    //user saved
-    //database completed
+  createorder(@Body() createorder: any) {
+    console.log(createorder);
 
     this.httpService
       .post(
         'https://discord.com/api/webhooks/1124927168984645802/E8ZIt-OL39wSweqjiR2aJKCUNPKoRRXlKwmRw5aI2dFa6lyxQ1SlM8SGiipZSecvWpjd',
-        {
-          data: {
-            content: 'New Order Created',
-          },
-        },
       )
       .subscribe({
         complete: () => {
