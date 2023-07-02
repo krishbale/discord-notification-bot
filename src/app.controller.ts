@@ -11,7 +11,6 @@ export class AppController {
 
   @Post('order')
   handleconsumemessage(@Body() body: any) {
-    console.log(body.repository.name);
     const avatarurl = body.sender.avatar_url;
     const content = `Hello sir, there is a new commit on 
    Repository: ${body.repository.name} <hr>
