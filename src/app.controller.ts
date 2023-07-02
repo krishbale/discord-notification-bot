@@ -16,13 +16,19 @@ export class AppController {
   @Post('order')
   createorder(@Body() body: any) {
     console.log(body.repository.name);
-
+    const avatarurl = body.sender.avatar_url;
     this.httpService
       .post(
         'https://discord.com/api/webhooks/1124927168984645802/E8ZIt-OL39wSweqjiR2aJKCUNPKoRRXlKwmRw5aI2dFa6lyxQ1SlM8SGiipZSecvWpjd',
         {
           content: ':tada: New Order',
-          avaratraurl: body.sender.avatar_url,
+          embeds: [
+            {
+              image: {
+                url: avatarurl,
+              },
+            },
+          ],
         },
       )
       .subscribe({
