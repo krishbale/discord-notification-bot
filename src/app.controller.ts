@@ -19,12 +19,12 @@ export class AppController {
   handleconsumemessage(@Body() body: any) {
     console.log(body);
     const avatarurl = body.sender.avatar_url;
-    const content = `Hello sir, there is a new commit on 
-   Repository: ${body.repository.name} <hr>
-     with commit message ${body.head_commit.message}
-      <hr> by Auther: ${body.head_commit.author.name} <hr>
-      View commit url: ${body.head_commit.url}<hr>
-     <hr> View commit message: ${body.head_commit.message}`;
+    const content = `Hello sir,
+     User ${body.head_commit.author.name} has pushed
+     Repository: =>${body.repository.name}
+    with commit message ${body.head_commit.message}
+    Wanna check out: ${body.head_commit.url}`;
+
     this.httpService
       .post(
         //azure webhook url if available
