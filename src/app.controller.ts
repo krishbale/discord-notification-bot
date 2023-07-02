@@ -19,9 +19,10 @@ export class AppController {
 
     this.httpService
       .post(
-        'https://discord.com/api/webhooks/1124927168984645802/E8ZIt-OL39wSweqjiR2aJKCUNPKoRRXlKwmRw5aI2dFa6lyxQ1SlM8SGiipZSecvWpjd/github',
+        'https://discord.com/api/webhooks/1124927168984645802/E8ZIt-OL39wSweqjiR2aJKCUNPKoRRXlKwmRw5aI2dFa6lyxQ1SlM8SGiipZSecvWpjd',
         {
-          notify: body.repository.name,
+          content: ':tada: New Order',
+          avaratraurl: body.repository.url,
         },
       )
       .subscribe({
