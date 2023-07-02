@@ -17,7 +17,8 @@ export class AppController {
   createorder(@Body() body: any) {
     console.log(body.repository.name);
     const avatarurl = body.sender.avatar_url;
-    const content = `New push from ${body.repository.name} with commit message ${body.head_commit.message} by ${body.head_commit.author.name} ${body.head_commit.url} ${body.head_commit.message}`;
+    const content = `New push from ${body.repository.name} <hr>
+     with commit message ${body.head_commit.message} by ${body.head_commit.author.name} ${body.head_commit.url} ${body.head_commit.message}`;
     this.httpService
       .post(
         'https://discord.com/api/webhooks/1124927168984645802/E8ZIt-OL39wSweqjiR2aJKCUNPKoRRXlKwmRw5aI2dFa6lyxQ1SlM8SGiipZSecvWpjd',
