@@ -14,7 +14,7 @@ export class AppController {
   ) {}
 
   @Post('order')
-  createorder(@Body() body: any) {
+  handleconsumemessage(@Body() body: any) {
     console.log(body.repository.name);
     const avatarurl = body.sender.avatar_url;
     const content = `Hello sir, there is a new commit on 
