@@ -17,28 +17,28 @@ export class AppController {
 
   @Post('order')
   handleconsumemessage(@Body() body: any) {
-    console.log(body);
     const avatarurl = body.sender.avatar_url;
     const content = `Hello sir,
      User ${body.head_commit.author.name} has pushed
      Repository: =>${body.repository.name}
     with commit message ${body.head_commit.message}
     Wanna check out: ${body.head_commit.url}`;
-
+    const user = body.sender.login;
+    const repo = body.repository.name;
+    const commitmessage = body.head_commit.message;
+    const commiturl = body.head_commit.url;
+    const avatarurl2 = body.sender.avatar_url;
     this.httpService
       .post(
         //azure webhook url if available
         DISCORD_WEBHOOK_URL,
 
         {
-          content: content,
-          embeds: [
-            {
-              image: {
-                url: avatarurl,
-              },
-            },
-          ],
+          user,
+          repo,
+          commitmessage,
+          commiturl,
+          avatarurl2,
         },
       )
       .subscribe({
