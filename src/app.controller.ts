@@ -1,10 +1,6 @@
-import { Body, Controller, Get, Post, Sse } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { HttpService } from '@nestjs/axios';
-
-interface MessageEvent {
-  data: string | object;
-}
 
 @Controller()
 export class AppController {
