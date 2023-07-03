@@ -20,6 +20,7 @@ export class AppController {
     const response =
       "Hi, I'm a  chatbot. I'm here to help you. How can I help you?";
     //message to lowercase
+    console.log(body);
     const message = body.message.toLowerCase();
     if (message.inclues('Hi' || 'Hello' || 'Hey' || 'Hey there' || 'Hey bot')) {
       this.httpService
