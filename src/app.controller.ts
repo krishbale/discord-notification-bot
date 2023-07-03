@@ -17,12 +17,6 @@ export class AppController {
 
   @Post('order')
   handleconsumemessage(@Body() body: any) {
-    const avatarurl = body.sender.avatar_url;
-    const content = `Hello sir,
-     User ${body.head_commit.author.name} has pushed
-     Repository: =>${body.repository.name}
-    with commit message ${body.head_commit.message}
-    Wanna check out: ${body.head_commit.url}`;
     const user = body.sender.login;
     const repo = body.repository.name;
     const commitmessage = body.head_commit.message;
