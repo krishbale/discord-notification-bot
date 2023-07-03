@@ -21,7 +21,7 @@ export class AppController {
       "Hi, I'm a  chatbot. I'm here to help you. How can I help you?";
     //message to lowercase
     console.log(body);
-    const message = body.message.toLowerCase();
+    const message = body.message.message.toLowerCase();
     if (message.inclues('Hi' || 'Hello' || 'Hey' || 'Hey there' || 'Hey bot')) {
       this.httpService
         .post(DISCORD_WEBHOOK_URL, {
