@@ -15,6 +15,48 @@ export class AppController {
     return this.appService.getHello();
   }
 
+  @Post('chatbot')
+  handlechatbotmessage(@Body() body: any) {
+    const response =
+      "Hi, I'm a  chatbot. I'm here to help you. How can I help you?";
+    //message to lowercase
+    const message = body.message.toLowerCase();
+    if (message.inclues('Hi' || 'Hello' || 'Hey' || 'Hey there' || 'Hey bot')) {
+      this.httpService
+        .post(DISCORD_WEBHOOK_URL, {
+          response,
+        })
+        .subscribe({
+          complete: () => {
+            console.log('completed');
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+    } else {
+      const alternateResponse =
+        'Sorry, I did not understand that. Please try again';
+      this.httpService
+        .post(
+          //azure webhook url if available
+          DISCORD_WEBHOOK_URL,
+          {
+            alternateResponse,
+          },
+        )
+        .subscribe({
+          complete: () => {
+            console.log('completed');
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      return { message: 'ok' };
+    }
+  }
+
   @Post('order')
   handleconsumemessage(@Body() body: any) {
     const user = body.sender.login;
